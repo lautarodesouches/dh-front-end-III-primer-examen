@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Input from '../Input'
 import Card from '../Card'
+import style from './style.module.css'
 
 export default function Form() {
     const [nombre, setNombre] = useState('')
@@ -19,7 +20,7 @@ export default function Form() {
 
     return (
         <>
-            <form action="">
+            <form action="" className={style.form}>
                 <Input
                     placeholder="Ingresa tu nombre"
                     handleChange={(e) => {
@@ -36,14 +37,16 @@ export default function Form() {
                     value={color}
                     required
                 />
-                <div>
-                    <button type="submit" onClick={handleSubmit}>
-                        ENVIAR
-                    </button>
-                </div>
+                <button
+                    className={style.button}
+                    type="submit"
+                    onClick={handleSubmit}
+                >
+                    ENVIAR
+                </button>
             </form>
             {error && (
-                <h2>Por favor chequea que la información sea correcta</h2>
+                <h2 className={style.error}>Por favor chequea que la información sea correcta</h2>
             )}
             {formularioOk && <Card nombre={nombre} color={color} />}
         </>
