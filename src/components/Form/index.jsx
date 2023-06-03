@@ -12,7 +12,11 @@ export default function Form() {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        if (nombre.length < 3 || color.length < 6) return setError(true)
+        if (nombre.length < 3 || color.length < 6) {
+            setError(true)
+            setFormularioOk(false)
+            return
+        }
 
         setError(false)
         setFormularioOk(true)
@@ -20,7 +24,7 @@ export default function Form() {
 
     return (
         <>
-            <form action="" className={style.form}>
+            <form action="" className={style.form} onSubmit={handleSubmit}>
                 <Input
                     placeholder="Ingresa tu nombre"
                     handleChange={(e) => {
@@ -37,16 +41,12 @@ export default function Form() {
                     value={color}
                     required
                 />
-                <button
-                    className={style.button}
-                    type="submit"
-                    onClick={handleSubmit}
-                >
-                    ENVIAR
-                </button>
+                <button className={style.button}>ENVIAR</button>
             </form>
             {error && (
-                <h2 className={style.error}>Por favor chequea que la información sea correcta</h2>
+                <h2 className={style.error}>
+                    Por favor chequea que la información sea correcta
+                </h2>
             )}
             {formularioOk && <Card nombre={nombre} color={color} />}
         </>
