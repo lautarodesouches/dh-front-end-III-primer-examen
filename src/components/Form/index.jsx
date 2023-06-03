@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Input from '../Input'
+import Card from '../Card'
 
 export default function Form() {
     const [nombre, setNombre] = useState('')
@@ -44,9 +45,7 @@ export default function Form() {
             {error && (
                 <h2>Por favor chequea que la información sea correcta</h2>
             )}
-            {
-                formularioOk && <h2>Enviado</h2>
-            }
+            {formularioOk && <Card nombre={nombre} color={color} />}
         </>
     )
 }
