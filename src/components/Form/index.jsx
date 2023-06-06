@@ -1,25 +1,25 @@
 import { useState } from 'react'
 import Input from '../Input'
-import Card from '../Card'
 import style from './style.module.css'
 
-export default function Form() {
+export default function Form({ setData }) {
     const [nombre, setNombre] = useState('')
     const [color, setColor] = useState('')
     const [error, setError] = useState(false)
-    const [formularioOk, setFormularioOk] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
         if (nombre.length < 3 || color.length < 6) {
-            setError(true)
-            setFormularioOk(false)
-            return
+            setData(null)
+            return setError('Por favor chequea que la información sea correcta')
         }
 
         setError(false)
-        setFormularioOk(true)
+        setData({
+            nombre,
+            color,
+        })
     }
 
     return (
@@ -43,12 +43,7 @@ export default function Form() {
                 />
                 <button className={style.button}>ENVIAR</button>
             </form>
-            {error && (
-                <h2 className={style.error}>
-                    Por favor chequea que la información sea correcta
-                </h2>
-            )}
-            {formularioOk && <Card nombre={nombre} color={color} />}
+            {error && <h2 className={style.error}>{error}</h2>}
         </>
     )
 }
